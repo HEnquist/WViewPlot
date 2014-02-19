@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    <link href="wdataview.css" rel="stylesheet">
+
+<!-- link href="./flot/examples/examples.css" rel="stylesheet" type="text/css" -->
+<script language="javascript" type="text/javascript" src="./flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="./flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="./flot/jquery.flot.time.js"></script>
+<script language="javascript" type="text/javascript" src="./flot/jquery.flot.axislabels.js"></script>
+<script language="javascript" type="text/javascript" src="./flot/jquery.flot.crosshair.js"></script>
+<script src="./jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+<script language="javascript" type="text/javascript" src="./wdataview.dev.js"></script>
+<script language="javascript" type="text/javascript" src="./js/bootstrap.js"></script>
+
+<link rel="stylesheet" href="./jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+
+<link href="./select2-3.4.1/select2.css" rel="stylesheet"/>
+<script src="./select2-3.4.1/select2.js"></script>
+<script>
+  $(document).ready(function() { 
+    if (!navigator.userAgent.match(/mobile/i)) {
+      $("#select1").select2({placeholder: "Select sensor(s) to plot", width: $("#plotform").width()});
+      $("#select2").select2({width:100, minimumResultsForSearch: -1});
+    }
+    $( "#dateStart" ).datepicker({ dateFormat: "yy-mm-dd", 
+                                   minDate: "2013-05-23", 
+                                   maxDate: 0,
+                                   onClose: function( selectedDate ) {
+                                     $( "#dateEnd" ).datepicker( "option", "minDate", selectedDate );
+                                   }});
+    $( "#dateStart" ).datepicker( "setDate", -7 );
+    $( "#dateEnd" ).datepicker({ dateFormat: "yy-mm-dd", 
+                                 minDate: "2013-05-23", 
+                                 maxDate: 0, 
+                                 onClose: function( selectedDate ) {
+                                   $( "#dateStart" ).datepicker( "option", "maxDate", selectedDate );
+                                 }});
+    $( "#dateEnd" ).datepicker( "setDate", "now" );
+    updateGraph();
+  });
+</script>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col col-12">
+      <h3>Plot weather station data</h3>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="col col-3">
+      <div class="well" id="plotform">
+        <ul id="dateTabs" class="nav nav-tabs">
+          <li class="active" id="relative"><a href="#tabrel" data-toggle="tab">Relative</a></li>
+          <li id="absolute" ><a href="#tababs" data-toggle="tab">Absolute</a></li>
+        </ul>
+        <div id="dateTabsContent" class="tab-content">
+          <div class="tab-pane fade in active" id="tabrel">   
+            <p>Enter number of days</p>
+            <form class="form-horizontal" id="formDatesRel">
+              <div class="row">
+                <div class="col col-7">Start (days)</div>
+                <div class=col col-5>
+                  <input class="input-sm" id="daysStart" size=7 max=9999 min=0 type="number" name="dS" value="7">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-7">End (days)</div>
+                <div class=col col-5>
+                  <input class="input-sm" id="daysEnd" size=7 max=9999 min=0 type="number" name="dE" value="0"></p>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="tababs">
+            <p>Select start and end dates</p>
+            <form id="formDatesAbs">
+              <div class="row">
+                <div class="col col-5"> <p>Start date: </p> </div>
+                <div class="col col-7">
+                  <p><input type="text" size=10 id="dateStart" name="dateStart" /></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-5"> <p>End date: </p> </div>
+                <div class="col col-7">
+                  <p><input type="text" size=10 id="dateEnd" name="dateEnd" /></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div> 
+        <form id="formParams">
+          <p>Select data series to plot</p>
+          <p><select id="select1" name="s[]" size="4" multiple="multiple">
+                <option value="barometer" selected>barometer</option>
+                <option value="inTemp">inTemp</option>
+                <option value="outTemp" selected>outTemp</option>
+                <option value="inHumidity">inHumidity</option>
+                <option value="outHumidity">outHumidity</option>
+                <option value="windSpeed">windSpeed</option>
+                <option value="windDir">windDir</option>
+                <option value="windGust">windGust</option>
+                <option value="windGustDir">windGustDir</option>
+                <option value="rainRate">rainRate</option>
+                <option value="rain">rain</option>
+                <option value="rainCumulative">rainCumulative</option>
+                <option value="dewpoint">dewpoint</option>
+                <option value="windchill">windchill</option>
+                <option value="heatindex">heatindex</option>
+                <option value="extraTemp3">extraTemp3</option>
+                <option value="sunHeating">sunHeating</option>
+          </select></p>
+          <p>Data aggregation</p>
+          <p><select id="select2" name="aggr">
+                <option value="auto" selected>auto</option>
+                <option value="1day">1 day</option>
+                <option value="4hours">4 hours</option>
+                <option value="1hour">1 hour</option>
+                <option value="none">none</option>
+          </select></p>
+        </form>
+        <p><button type="button"  class="btn btn-primary btn-lg btn-block" onclick="updateGraph()">Plot</button></p>
+      </div>
+    </div>
+    <div class="col col-9">
+      <div id="placeholder" class="flot-container"></div>
+      <span id="clickplaceholder"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
