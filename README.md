@@ -1,7 +1,10 @@
-WViewPlot
+WViewPlot 1.0
 =========
 
-Interactive plotting of weather data from the wview database.
+Interactive plotting of weather data from the sqlite3 database.
+Compatible with the databases from Wview and Weewx
 http://www.wviewweather.com/
+http://www.weewx.com/
 
+See example site at http://dulcenet.home.kg/weewx/wviewplot 
 
