@@ -1,3 +1,10 @@
+/*!
+ * WViewPlot 1.0
+ *
+ * Copyright 2014-2015 Henrik Enquist
+ * Released under the GPLv3 license
+ */
+
 function plotJson(series,placeholder,clickplaceholder) {
   //basic plot options
   if (series.message === 'ok') {
