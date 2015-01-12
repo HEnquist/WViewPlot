@@ -6,7 +6,7 @@ Interactive plotting of weather data using Flot Charts.
 http://www.flotcharts.org/
 
 
-Compatible with the databases from Wview and Weewx
+Compatible with the sqlite databases from Wview and Weewx
 
 http://www.wviewweather.com/
 
@@ -24,4 +24,12 @@ http://getbootstrap.com/
 
 https://select2.github.io/
 
+
+
+Installation
+
+
+To get it working, place all the files on your web server. Get all the dependencies (flot, jQuery, jQuery-UI, bootstrap, select2) and update index.htm to point at them. Adjust the date in "$( "#dateStart" ).datepicker(..)" and "$( "#dateEnd" ).datepicker(..)" to suit your database.
+
+Also change the "$database" variable in getjson.php to point at your Wview/Weewx sqlite database.
 
