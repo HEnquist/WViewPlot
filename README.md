@@ -36,7 +36,7 @@ Also change the "$database" variable in getjson.php to point at your Wview/Weewx
 
 Verify that the php script works by a simple manual query:
 
-http://<yoursite>/wviewplot/getjson.dev.php?dS=7&dE=0&dAbs=0&s=rain
+http://(yoursite)/wviewplot/getjson.dev.php?dS=7&dE=0&dAbs=0&s=rain
 
 This should give you an array of data ending with "message":"ok".
 
