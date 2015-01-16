@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     -->
-    
+	
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this page -->
@@ -28,14 +28,14 @@
 <script language="javascript" type="text/javascript" src="./flot/jquery.flot.time.js"></script>
 <script language="javascript" type="text/javascript" src="./flot/jquery.flot.axislabels.js"></script>
 <script language="javascript" type="text/javascript" src="./flot/jquery.flot.crosshair.js"></script>
-<script src="./jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+<script src="./jquery-ui-1.10.4/js/jquery-ui-1.10.4.js"></script>
 <script language="javascript" type="text/javascript" src="./wdataview.dev.js"></script>
 <script language="javascript" type="text/javascript" src="./js/bootstrap.js"></script>
 
-<link rel="stylesheet" href="./jquery-ui-1.10.3/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="./jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.css" />
 
-<link href="./select2-3.4.1/select2.css" rel="stylesheet"/>
-<script src="./select2-3.4.1/select2.js"></script>
+<link href="./select2-3.5.0/select2.css" rel="stylesheet"/>
+<script src="./select2-3.5.0/select2.js"></script>
 <script>
   $(document).ready(function() { 
     if (!navigator.userAgent.match(/mobile/i)) {
@@ -61,13 +61,13 @@
 </script>
 
 <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="col col-12">
+  <div class="row">
+    <div class="col col-xs-12">
       <h3>Plot weather station data</h3>
     </div>
   </div>
   <div class="row-fluid">
-    <div class="col col-3">
+    <div class="col col-xs-3">
       <div class="well" id="plotform">
         <ul id="dateTabs" class="nav nav-tabs">
           <li class="active" id="relative"><a href="#tabrel" data-toggle="tab">Relative</a></li>
@@ -78,14 +78,14 @@
             <p>Enter number of days</p>
             <form class="form-horizontal" id="formDatesRel">
               <div class="row">
-                <div class="col col-7">Start (days)</div>
-                <div class=col col-5>
+                <div class="col col-xs-7">Start (days)</div>
+                <div class=col col-xs-5>
                   <input class="input-sm" id="daysStart" size=7 max=9999 min=0 type="number" name="dS" value="7">
                 </div>
               </div>
               <div class="row">
-                <div class="col col-7">End (days)</div>
-                <div class=col col-5>
+                <div class="col col-xs-7">End (days)</div>
+                <div class=col col-xs-5>
                   <input class="input-sm" id="daysEnd" size=7 max=9999 min=0 type="number" name="dE" value="0"></p>
                 </div>
               </div>
@@ -95,14 +95,14 @@
             <p>Select start and end dates</p>
             <form id="formDatesAbs">
               <div class="row">
-                <div class="col col-5"> <p>Start date: </p> </div>
-                <div class="col col-7">
+                <div class="col col-xs-5"> <p>Start date: </p> </div>
+                <div class="col col-xs-7">
                   <p><input type="text" size=10 id="dateStart" name="dateStart" /></p>
                 </div>
               </div>
               <div class="row">
-                <div class="col col-5"> <p>End date: </p> </div>
-                <div class="col col-7">
+                <div class="col col-xs-5"> <p>End date: </p> </div>
+                <div class="col col-xs-7">
                   <p><input type="text" size=10 id="dateEnd" name="dateEnd" /></p>
                 </div>
               </div>
@@ -142,7 +142,7 @@
         <p><button type="button"  class="btn btn-primary btn-lg btn-block" onclick="updateGraph()">Plot</button></p>
       </div>
     </div>
-    <div class="col col-9">
+    <div class="col col-xs-9">
       <div id="placeholder" class="flot-container"></div>
       <span id="clickplaceholder"></span>
     </div>
